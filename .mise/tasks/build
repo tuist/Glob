@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# mise description="Build the project"
+
+set -e
+
+cargo build --target aarch64-apple-darwin --manifest-path $MISE_PROJECT_ROOT/Cargo.toml
+cargo build --target x86_64-apple-darwin --manifest-path $MISE_PROJECT_ROOT/Cargo.toml
+
+mkdir -p $MISE_PROJECT_ROOT/target/universal-macos/debug/
+
+lipo \
+    $MISE_PROJECT_ROOT/target/aarch64-apple-darwin/debug/libGlob.a \
+    $MISE_PROJECT_ROOT/target/x86_64-apple-darwin/debug/libGlob.a -create -output \
+    $MISE_PROJECT_ROOT/target/universal-macos/debug/libGlob.a
+
+swift-bridge-cli create-package \
+  --bridges-dir $MISE_PROJECT_ROOT/generated \
+  --out-dir $MISE_PROJECT_ROOT/Package \
+  --macos $MISE_PROJECT_ROOT/target/universal-macos/debug/libGlob.a \
+  --name Glob

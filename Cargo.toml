@@ -1,0 +1,16 @@
+[package]
+name = "Glob"
+version = "0.1.0"
+edition = "2021"
+
+
+[lib]
+name = "Glob"
+crate-type = ["staticlib"]
+
+[dependencies]
+glob-match = "0.2.1"
+swift-bridge = "0.1"
+
+[build-dependencies]
+swift-bridge-build = "0.1"
