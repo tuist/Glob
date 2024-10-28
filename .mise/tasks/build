@@ -15,6 +15,6 @@ lipo \
 
 swift-bridge-cli create-package \
   --bridges-dir $MISE_PROJECT_ROOT/generated \
-  --out-dir $MISE_PROJECT_ROOT/Package \
+  --out-dir $MISE_PROJECT_ROOT \
   --macos $MISE_PROJECT_ROOT/target/universal-macos/debug/libGlob.a \
   --name Glob

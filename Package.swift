@@ -9,9 +9,13 @@ let package = Package(
 	],
 	dependencies: [],
 	targets: [
+		.binaryTarget(
+			name: "RustXcframework",
+			path: "RustXcframework.xcframework"
+		),
 		.target(
 			name: "Glob",
-			dependencies: [])
+			dependencies: ["RustXcframework"])
 	]
 )
 	
